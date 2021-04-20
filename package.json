@@ -1,0 +1,12 @@
+{
+  "name": "testing-strategy-pixi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jessicalettall/testing-strategy-pixi.git",
+  "author": "JLettall <jessica.lettall@skybettingandgaming.com>",
+  "license": "MIT",
+  "dependencies": {
+    "gsap": "^3.6.1",
+    "pixi.js": "^6.0.2"
+  }
+}
