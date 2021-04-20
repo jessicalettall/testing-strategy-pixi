@@ -58145,7 +58145,7 @@ TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
 exports.TweenMax = TweenMaxWithCSS;
 exports.default = exports.gsap = gsapWithCSS;
-},{"./gsap-core.js":"../node_modules/gsap/gsap-core.js","./CSSPlugin.js":"../node_modules/gsap/CSSPlugin.js"}],"index.ts":[function(require,module,exports) {
+},{"./gsap-core.js":"../node_modules/gsap/gsap-core.js","./CSSPlugin.js":"../node_modules/gsap/CSSPlugin.js"}],"PitchVis.ts":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -58164,29 +58164,81 @@ var Color_1 = require("./helpers/Color");
 
 var gsap_1 = __importDefault(require("gsap"));
 
-var app = new pixi_js_1.Application({
-  backgroundColor: Color_1.Color.SeaGreen,
-  width: 500,
-  height: 350
+var PitchVis =
+/** @class */
+function () {
+  function PitchVis() {
+    this.app = new pixi_js_1.Application({
+      backgroundColor: Color_1.Color.SeaGreen,
+      width: 500,
+      height: 350
+    });
+    this.ball = new pixi_js_1.Graphics();
+    this.ball.beginFill(Color_1.Color.GhostWhite);
+    this.ball.drawCircle(20, 20, 10);
+    this.app.stage.addChild(this.ball);
+  }
+
+  PitchVis.prototype.moveBall = function (x, y) {
+    gsap_1.default.to(this.ball, {
+      x: x,
+      y: y,
+      duration: 2
+    });
+  };
+
+  PitchVis.prototype.getApp = function () {
+    return this.app;
+  };
+
+  return PitchVis;
+}();
+
+exports.default = PitchVis;
+},{"pixi.js":"../node_modules/pixi.js/dist/esm/pixi.js","./helpers/Color":"helpers/Color.ts","gsap":"../node_modules/gsap/index.js"}],"index.ts":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-document.body.appendChild(app.view);
-var ball = new pixi_js_1.Graphics();
-ball.beginFill(Color_1.Color.GhostWhite);
-ball.drawCircle(20, 20, 10);
-app.stage.addChild(ball);
-gsap_1.default.to(ball, {
-  x: 250,
-  y: 175,
-  delay: 1,
-  duration: 2
-});
-gsap_1.default.to(ball, {
-  x: 450,
-  y: 90,
-  duration: 4,
-  delay: 5
-});
-},{"pixi.js":"../node_modules/pixi.js/dist/esm/pixi.js","./helpers/Color":"helpers/Color.ts","gsap":"../node_modules/gsap/index.js"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+var PitchVis_1 = __importDefault(require("./PitchVis"));
+
+var pitchVis = new PitchVis_1.default();
+document.body.appendChild(pitchVis.getApp().view);
+setTimeout(function () {
+  pitchVis.moveBall(250, 175);
+}, 1000);
+setTimeout(function () {
+  pitchVis.moveBall(450, 90);
+}, 6000); // const app = new Application({
+//     backgroundColor: Color.SeaGreen,
+//     width: 500,
+//     height: 350,
+// });
+// const ball = new Graphics();
+// ball.beginFill(Color.GhostWhite);
+// ball.drawCircle(20, 20, 10);
+// app.stage.addChild(ball);
+// gsap.to(ball, {
+//     x: 250,
+//     y: 175,
+//     delay: 1,
+//     duration: 2
+// });
+// gsap.to(ball, {
+//     x:450,
+//     y:90,
+//     duration: 4,
+//     delay:5
+// });
+},{"./PitchVis":"PitchVis.ts"}],"../../../.config/yarn/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -58214,7 +58266,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59877" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52821" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
