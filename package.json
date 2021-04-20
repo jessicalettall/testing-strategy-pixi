@@ -5,8 +5,15 @@
   "repository": "https://github.com/jessicalettall/testing-strategy-pixi.git",
   "author": "JLettall <jessica.lettall@skybettingandgaming.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "parcel serve ./src/index.html",
+    "build": "parcel build ./src/index.html"
+  },
   "dependencies": {
     "gsap": "^3.6.1",
     "pixi.js": "^6.0.2"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.4"
   }
 }
